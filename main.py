@@ -1,24 +1,45 @@
-def transferToAccount(p1, p2, how_much_to_send):
-    if p1 > how_much_to_send:
-        print("Money before Sedning...")
-        print(f"p1: {p1}")
-        print(f"p2: {p2}")
+import random
 
-        # Money Sending Logic
-        p1 = p1 - how_much_to_send
-        p2 = p2 + how_much_to_send
+class Person:
+    def __init__(self, name, age):
+        self.age = age
+        self.name = name
+        self.account_number = None
+        self.account_balance = 0
+    
+    def get_details(self):
+        print()
+        print(f"Person Name: {self.name} | Person Age: {self.age}")
+        print(f"Account Number: {self.account_number} | Bank Balance: {self.account_balance}")
+        print()
 
-        print(f"Money after Sending...")
-        print(f"p1: {p1}")
-        print(f"p2: {p2}")
-    else:
-        print("Unable to send Money, Insufficient Balance!")
-    return p1, p2
+class BankAccount:
+    def __init__(self, person):
+        self.person = person
+        self.person.account_number = random.randint(10000, 999999)
 
-p1 = 100
-p2 = 130
-send_money = 30
+    @staticmethod
+    def send_money(person_1, person_2, how_much_to_send):
+        person_1.account_balance = person_1.account_balance - how_much_to_send
+        person_2.account_balance = person_2.account_balance + how_much_to_send
 
-p1, p2 = transferToAccount(p1, p2, send_money)
-print("Sending Again")
-p1, p2 = transferToAccount(p1, p2, send_money)
+p1 = Person(name = "Roshan", age = 19)
+p2 = Person(name = "Rohit", age = 21)
+
+print("Before Creating Account\n")
+p1.get_details()
+p2.get_details()
+
+
+account_1 = BankAccount(p1)
+account_2 = BankAccount(p2)
+
+print("After Creating Account\n")
+p1.get_details()
+p2.get_details()
+
+BankAccount.send_money(person_1 = p1, person_2 = p2, how_much_to_send = 100)
+
+print("After Creating Account\n")
+p1.get_details()
+p2.get_details()
